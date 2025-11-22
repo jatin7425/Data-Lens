@@ -2,13 +2,10 @@ project = "Data-Lens"
 
 [[services]]
 name = "backend"
-builder = "NIXPACKS"
-rootDir = "backend"
-buildCommand = "pip install -r requirements.txt"
-startCommand = "./start.sh"
+dockerfile = "Dockerfile"
 
 # Notes:
-# - Railway injects the runtime PORT via the environment variable `$PORT`.
-# - `rootDir` is set to `backend` so the `startCommand` can use `main:app`.
-# - If you prefer the start command to explicitly reference the module,
-#   use `uvicorn backend.main:app --host 0.0.0.0 --port $PORT` instead.
+# - Railway will build the included `Dockerfile` which installs Python and
+#   dependencies and runs `uvicorn` inside the `backend` directory.
+# - The repo-level `start.sh` is no longer used by Railway once a Dockerfile
+#   is present; it remains in the repo for local convenience.
