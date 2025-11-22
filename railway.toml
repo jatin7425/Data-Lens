@@ -1,0 +1,14 @@
+project = "Data-Lens"
+
+[[services]]
+name = "backend"
+builder = "NIXPACKS"
+rootDir = "backend"
+buildCommand = "pip install -r requirements.txt"
+startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+
+# Notes:
+# - Railway injects the runtime PORT via the environment variable `$PORT`.
+# - `rootDir` is set to `backend` so the `startCommand` can use `main:app`.
+# - If you prefer the start command to explicitly reference the module,
+#   use `uvicorn backend.main:app --host 0.0.0.0 --port $PORT` instead.
